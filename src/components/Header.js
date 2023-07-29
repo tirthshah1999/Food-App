@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Logo } from "../utils/constants";
+import useOnline from "../utils/useOnline";
 
 function Header() {
+  const isOnline = useOnline();
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -9,6 +12,7 @@ function Header() {
       </div>
       <div className="nav-items">
         <ul>
+          <li>Online Status: {isOnline ? "✅" : "🛑"}</li>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -17,6 +21,9 @@ function Header() {
           </li>
           <li>
             <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/grocery">Grocery</Link>
           </li>
           <li>Cart</li>
         </ul>
