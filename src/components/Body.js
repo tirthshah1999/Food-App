@@ -12,6 +12,19 @@ function Body() {
   const [restaurantList, filteredRestaurantList, setFilteredRestaurantList] =
     useRestaurants();
 
+  const handleSearchInput = (e) => {
+    if (e.target.value === "") {
+      setFilteredRestaurantList(restaurantList);
+    }
+    setSearchInput(e.target.value);
+  };
+
+  const handleKeyUp = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const handleSearch = () => {
     const filteredData = restaurantList.filter((restaurant) =>
       restaurant.info.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -34,29 +47,40 @@ function Body() {
 
   if (!isOnline)
     return (
-      <h1>
+      <h1 className="mt-4 text-center">
         Looks like you're not connected to internet. Please check your internet
         connection
       </h1>
     );
 
   return (
-    <div className="body">
-      <div className="filter-container">
+    <div className="body mx-4">
+      <div className="flex mt-4">
         <div className="search">
           <input
             type="text"
+            placeholder="Pizza..."
+            className="px-3 border border-black border-solid rounded"
             value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
+            onChange={handleSearchInput}
+            onKeyUp={handleKeyUp}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button
+            className="px-4 py-1 bg-[#4681f4] text-white m-4 rounded-lg"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </div>
-        <button className="filter-btn" onClick={handleFilter}>
+        <button
+          className="px-4 py-1 bg-[#4681f4] text-white m-4 rounded-lg"
+          onClick={handleFilter}
+        >
           Top Rated Restaurants
         </button>
       </div>
 
-      <div className="restaurant-container">
+      <div className="flex flex-wrap gap-4">
         {filteredRestaurantList.length === 0 ? (
           <h1>No results found</h1>
         ) : (
