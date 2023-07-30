@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurants from "../utils/useRestaurants";
@@ -8,6 +8,7 @@ import useOnline from "../utils/useOnline";
 function Body() {
   const [searchInput, setSearchInput] = useState("");
   const isOnline = useOnline();
+  const RestaurantPromotedCard = withPromotedLabel(RestaurantCard);
 
   const [restaurantList, filteredRestaurantList, setFilteredRestaurantList] =
     useRestaurants();
@@ -52,7 +53,6 @@ function Body() {
         connection
       </h1>
     );
-
   return (
     <div className="body mx-4">
       <div className="flex mt-4">
@@ -89,7 +89,11 @@ function Body() {
               to={"/restaurants/" + restaurant.info.id}
               key={restaurant.info.id}
             >
-              <RestaurantCard resData={restaurant} />
+              {restaurant.info.avgRating < 4 ? (
+                <RestaurantPromotedCard resData={restaurant} />
+              ) : (
+                <RestaurantCard resData={restaurant} />
+              )}
             </Link>
           ))
         )}

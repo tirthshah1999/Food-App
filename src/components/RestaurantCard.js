@@ -22,5 +22,18 @@ function RestaurantCard({ resData }) {
     </div>
   );
 }
-
 export default RestaurantCard;
+
+// HOC
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div className="relative">
+        <label className="absolute right-0 p-1 bg-orange-500 text-white z-10 rounded-md">
+          Promoted
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
