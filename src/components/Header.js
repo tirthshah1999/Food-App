@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Logo } from "../utils/constants";
 import useOnline from "../utils/useOnline";
+import { useSelector } from "react-redux";
 
 function Header() {
   const isOnline = useOnline();
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex justify-between items-center border-b-2">
@@ -25,8 +27,13 @@ function Header() {
           <li className="pb-3 transition ease-in-out delay-100 hover:text-red-600 hover:border-b-2 hover:border-red-400 hover:pb-0">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="pb-3 transition ease-in-out delay-100 hover:text-red-600 hover:border-b-2 hover:border-red-400 hover:pb-0">
-            Cart
+          <li className="pb-3 relative transition ease-in-out delay-100 hover:text-red-600 hover:border-b-2 hover:border-red-400 hover:pb-0">
+            <Link to="/cart">
+              Cart{" "}
+              <span className="absolute bottom-8 -right-3 bg-[#4681f4] text-white text-xs px-2 rounded-full">
+                {cartItems.length}
+              </span>
+            </Link>
           </li>
         </ul>
       </div>

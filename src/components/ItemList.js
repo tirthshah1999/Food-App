@@ -1,10 +1,22 @@
 import React from "react";
 import { CDN_URI } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItems, removeItems } from "../utils/cartSlice";
 
-function ItemList({ items }) {
+function ItemList({ items, btnText, btnMethod }) {
+  const dispatch = useDispatch();
+
+  const handleAddItems = (item) => {
+    dispatch(addItems(item));
+  };
+
+  const handleRemoveItems = (item) => {
+    dispatch(removeItems(item.card.info.id));
+  };
+
   return (
     <div>
-      {items.map((item) => (
+      {items.map((item, i) => (
         <div
           key={item.card.info.id}
           className="p-2 m-2 border-gray-200 border-b-2 text-left flex"
@@ -27,9 +39,21 @@ function ItemList({ items }) {
                 alt="food-item"
                 className="w-28 rounded-md h-20"
               />
-              <button className="absolute -bottom-2 px-2 py-1 rounded bg-white shadow-lg text-green-600 text-sm">
-                Add +
-              </button>
+              {btnMethod === "Add" ? (
+                <button
+                  className="absolute -bottom-2 px-2 py-1 rounded bg-white shadow-lg text-green-600 text-sm"
+                  onClick={() => handleAddItems(item)}
+                >
+                  {btnText}
+                </button>
+              ) : (
+                <button
+                  className="absolute -bottom-2 px-2 py-1 rounded bg-white shadow-lg text-green-600 text-sm"
+                  onClick={() => handleRemoveItems(item)}
+                >
+                  {btnText}
+                </button>
+              )}
             </div>
           </div>
         </div>

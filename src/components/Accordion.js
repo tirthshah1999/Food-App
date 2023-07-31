@@ -18,7 +18,13 @@ function Accordion({ data, setShowItems, showItems }) {
           </span>
           <span className="text-lg">{showItems ? "⬆️" : "⬇️"}</span>
         </div>
-        {showItems && <ItemList items={data.itemCards} />}
+        {showItems && (
+          <ItemList
+            items={data.itemCards}
+            btnText={"Add +"}
+            btnMethod={"Add"}
+          />
+        )}
       </div>
     </div>
   );
