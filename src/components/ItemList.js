@@ -18,6 +18,7 @@ function ItemList({ items, btnText, btnMethod }) {
     <div>
       {items.map((item, i) => (
         <div
+          data-testid="FoodItems"
           key={item.card.info.id}
           className="p-2 m-2 border-gray-200 border-b-2 text-left flex"
         >

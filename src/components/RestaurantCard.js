@@ -1,12 +1,15 @@
+import React from "react";
 import { CDN_URI } from "../utils/constants";
 
 function RestaurantCard({ resData }) {
-  const { name, cloudinaryImageId, costForTwo, cuisines, avgRating } =
-    resData.info;
-  const { deliveryTime } = resData.info.sla;
+  const { name, cloudinaryImageId, costForTwo, cuisines, avgRating } = resData;
+  const { deliveryTime } = resData.sla;
 
   return (
-    <div className="mt-4 w-56 bg-[#f0f0f0] h-[520px]  rounded-lg hover:scale-[1.05] transition ease-in-out delay-100 ">
+    <div
+      data-testid="resCard"
+      className="mt-4 w-56 bg-[#f0f0f0] h-[520px]  rounded-lg hover:scale-[1.05] transition ease-in-out delay-100 "
+    >
       <img
         src={CDN_URI + cloudinaryImageId}
         alt="res-logo"

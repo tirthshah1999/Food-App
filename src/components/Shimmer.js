@@ -1,3 +1,5 @@
+import React from "react";
+
 const Shimmer = () => {
   return (
     <div className="animate-pulse flex flex-wrap">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Accordion from "./Accordion";
 import Shimmer from "./Shimmer";

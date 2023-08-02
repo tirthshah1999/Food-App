@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -90,9 +90,9 @@ function Body() {
               key={restaurant.info.id}
             >
               {restaurant.info.avgRating < 4 ? (
-                <RestaurantPromotedCard resData={restaurant} />
+                <RestaurantPromotedCard resData={restaurant.info} />
               ) : (
-                <RestaurantCard resData={restaurant} />
+                <RestaurantCard resData={restaurant.info} />
               )}
             </Link>
           ))
